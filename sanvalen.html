@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Animado - San Valentín</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: pink;
+            overflow: hidden;
+        }
+        /* Animación de corazones */
+        
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .heart {
+            position: absolute;
+            color: #ff6699;
+            font-size: 24px;
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+        /* Sobre */
+        
+        .container {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            cursor: pointer;
+        }
+        
+        .envelope {
+            width: 100%;
+            height: 100%;
+            background-color: #ff6699;
+            position: absolute;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .top-flap {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 100px solid #ff3366;
+            top: 0;
+            transition: transform 0.6s ease-in-out;
+            transform-origin: top;
+        }
+        
+        .text-on-envelope {
+            position: absolute;
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+        
+        .letter {
+            position: absolute;
+            width: 90%;
+            height: 80%;
+            background-color: white;
+            top: 100%;
+            transition: top 0.6s ease-in-out;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ff3366;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .container.open .top-flap {
+            transform: rotateX(180deg);
+        }
+        
+        .container.open .letter {
+            top: 10px;
+        }
+        /* Animación del fondo con "Te amo" */
+        
+        .love-text {
+            position: absolute;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            opacity: 0.7;
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Corazones animados -->
+    <div class="hearts"></div>
+
+    <div class="container" onclick="openEnvelope()">
+        <div class="envelope">
+            <div class="top-flap"></div>
+            <div class="text-on-envelope">💖 Happy Valentine's Day mi Love! 💖</div>
+            <div class="letter">
+                Hoy es un dia muy especial para mi. Porque hoy es nuestro primer San Valentin juntos.
+                <br>Eres el amor de mi vida, mi Esposa,mi princeshita pequeña, mi niñita, eres todo para mi. Se que te hago enojar mucho por mis tonterias y no se como me soportas tanto, pero gracias por amarme tan bonito te amoo tanto mi amor trato de
+                ser lo mejor para ti aunque aveces no se como. Pro este corazoncito de pollo te ama mucho aunque aveces no sepa como de mostrartelo. Te amo mi amor, Feliz San Valentin mi amor.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            document.querySelector(".container").classList.toggle("open");
+        }
+
+        // Generar corazones aleatorios en el fondo
+        function createHearts() {
+            const heartsContainer = document.querySelector(".hearts");
+
+            for (let i = 0; i < 15; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.top = Math.random() * 100 + "vh";
+                heart.style.animationDuration = Math.random() * 2 + 2 + "s";
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        createHearts();
+
+        // Generar textos de "Te amo" animados en el fondo
+        function createLoveText() {
+            const heartsContainer = document.querySelector(".hearts");
+
+            for (let i = 0; i < 15; i++) {
+                let loveText = document.createElement("div");
+                loveText.classList.add("love-text");
+                loveText.innerText = "Te amo";
+                loveText.style.left = Math.random() * 100 + "vw";
+                loveText.style.top = Math.random() * 100 + "vh";
+                loveText.style.animationDuration = Math.random() * 2 + 2 + "s";
+                loveText.style.fontSize = Math.random() * 15 + 15 + "px";
+                heartsContainer.appendChild(loveText);
+            }
+        }
+
+        createLoveText();
+    </script>
+
+</body>
+
+</html>
